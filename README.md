@@ -62,6 +62,8 @@
 | :--- | :--- |
 | `main.py` | 核心优选程序（抓取、测试、筛选、更新、推送） |
 | `config.json` | 所有运行参数的配置文件（含详细注释） |
+| `config.local.json` | 可选的本地私密覆盖配置（不会提交） |
+| `.github/workflows/cfnb-auto-sync.yml` | GitHub Actions 自动运行与同步配置 |
 | `git_sync.ps1` | Windows 推送脚本（强制推送 `ip.txt` 到 GitHub） |
 | `git_sync.sh` | Linux 推送脚本（强制推送 `ip.txt` 到 GitHub） |
 | `setup.ps1` | Windows 一键部署脚本（安装依赖并配置计划任务） |
@@ -113,7 +115,7 @@
 | **3.** **Expiration 必须选 `No expiration`** | **3.** 权限已自动填好（区域 - DNS - 编辑），区域资源选择你的域名 | **3.** 复制保存 AppToken（仅显示一次） |
 | **4.** Select scopes: 仅勾选 **repo**（自动勾全） | **4.** 点击 继续以显示摘要 → 创建令牌 | **4.** 左侧“关注应用”→微信扫码关注公众号 |
 | **5.** Generate token，保存 | **5.** 立即复制并保存令牌（仅显示一次） | **5.** 公众号菜单“我的”→“我的UID”获取 UID |
-| 填入 `git_sync.ps1` / `git_sync.sh` 的 `github_token` | 填入 `config.json` 的 `CF_API_TOKEN` 和 `CF_ZONE_ID` | 填入 `config.json` 的 `WXPUSHER_APP_TOKEN` 和 `WXPUSHER_UIDS` |
+| 放入 `GITHUB_TOKEN` 环境变量或 GitHub Actions Secrets | 放入环境变量/Secrets 的 `CF_API_TOKEN`、`CF_ZONE_ID` 和 `CF_DNS_RECORD_NAME` | 放入环境变量/Secrets 的 `WXPUSHER_APP_TOKEN` 和 `WXPUSHER_UIDS` |
 
 > 💡 若不需要某项功能，可跳过对应步骤或在配置中关闭开关：  
 > - 无需微信通知：`config.json` 中设 `ENABLE_WXPUSHER: false`  
@@ -250,7 +252,7 @@ python3 main.py
 > [!NOTE]
 > 默认参数基于 **2核2G 云服务器** 测试通过。若在 **软路由、树莓派或低配 PC** 上运行，建议适当降低 `MAX_WORKERS`、`BANDWIDTH_WORKERS`。
 
-所有参数均位于 `config.json`，以下为逐项说明。
+所有参数均位于 `config.json`，也可以通过同目录下的 `config.local.json` 或同名环境变量覆盖。敏感值建议放在 `config.local.json`、系统环境变量或 GitHub Actions Secrets 中，以下为逐项说明。
 
 ### 筛选模式与数量控制
 
@@ -328,7 +330,7 @@ python3 main.py
 | `CF_PROXIED` | `boolean` | `false` | 是否启用 Cloudflare CDN 代理 |
 | `CF_DNS_CONNECT_TIMEOUT` | `int` | `3` | Cloudflare API 连接超时（秒） |
 | `CF_DNS_READ_TIMEOUT` | `int` | `3` | Cloudflare API 读取超时（秒） |
-| `DNS_RECORD_TYPE` | `string` | `"A"` | DNS 记录类型（A 或 AAAA） |
+| `DNS_RECORD_TYPE` | `string` | `"TXT"` | DNS 记录类型（A 或 TXT） |
 
 > 💡 若不需要 DNS 更新，将 `CF_ENABLED` 设为 `false` 即可。
 
@@ -503,6 +505,22 @@ python3 main.py
 
 本工具支持每次运行后将 `ip.txt` 自动推送到你指定的 GitHub 仓库，方便通过 Raw 链接订阅节点列表。
 
+### GitHub Actions 自动运行（推荐）
+
+本仓库已添加 `.github/workflows/cfnb-auto-sync.yml`，支持手动运行和每 6 小时自动运行一次。工作流会运行 `main.py`，并在 `ip.txt` 有变化时自动提交到当前仓库。
+
+请在仓库 **Settings → Secrets and variables → Actions → Repository secrets** 中添加以下密钥：
+
+| 名称 | 用途 |
+| :--- | :--- |
+| `CF_API_TOKEN` | Cloudflare DNS API Token |
+| `CF_ZONE_ID` | Cloudflare Zone ID |
+| `CF_DNS_RECORD_NAME` | 要更新的完整 DNS 记录名 |
+| `WXPUSHER_APP_TOKEN` | 可选，WxPusher 通知 Token |
+| `WXPUSHER_UIDS` | 可选，多个 UID 可用逗号分隔 |
+
+若没有设置 Cloudflare 三个密钥，工作流仍会生成并同步 `ip.txt`，但会跳过 Cloudflare DNS 更新。不要把真实 Token 写入 `config.json` 或 `git_sync.*` 并提交。
+
 ### 第一步：创建 GitHub 仓库
 
 1. 登录 GitHub，点击右上角 `+` → **New repository**。
@@ -560,26 +578,19 @@ git branch -M $(git remote show origin | grep "HEAD branch" | cut -d " " -f5) 2>
 ### 第三步：获取并填写 GitHub Token
 
 1. 按照 [获取必要令牌](#-获取必要令牌重要) 中的步骤获取 **GitHub Personal Access Token**（需勾选 `repo` 权限，过期时间设为 **No expiration**）。
-2. 编辑对应平台的推送脚本：
-   - **Windows**：用文本编辑器打开 `git_sync.ps1`
-   - **Linux**：用文本编辑器打开 `git_sync.sh`
-3. 将脚本开头部分的四个变量替换为你的真实信息：
+2. 将 Token 放入环境变量，脚本会默认推送到 `7600A/CF-proper` 的 `main` 分支：
 
    ```powershell
-   # Windows (git_sync.ps1)
-   $github_token = "your_github_personal_access_token_here"
-   $github_username = "your_github_username"
-   $repo_name = "your_repo_name"
-   $branch = "your_branch"
+   # Windows PowerShell
+   $env:GITHUB_TOKEN = "your_github_personal_access_token_here"
    ```
 
    ```bash
-   # Linux (git_sync.sh)
-   github_token="your_github_personal_access_token_here"
-   github_username="your_github_username"
-   repo_name="your_repo_name"
-   branch="your_branch"
+   # Linux / macOS
+   export GITHUB_TOKEN="your_github_personal_access_token_here"
    ```
+
+3. 如需推送到其他仓库，可额外设置 `GITHUB_USERNAME`、`GITHUB_REPO_NAME` 和 `GITHUB_BRANCH` 环境变量。
 
 ### 第四步：测试推送
 
@@ -597,8 +608,8 @@ git branch -M $(git remote show origin | grep "HEAD branch" | cut -d " " -f5) 2>
 |----------|------|----------|
 | `remote origin already exists` | 远程仓库已关联过 | 执行 `git remote set-url origin https://github.com/你的用户名/仓库名.git` 直接修改地址 |
 | `failed to push some refs` | 远程有本地没有的文件（如 README） | 首次推送使用 `git push -f origin main` 强制覆盖（⚠️ 会删除远程多余文件） |
-| `Permission denied` 或 `403` | Token 无效或权限不足 | 检查 Token 是否勾选 `repo` 权限，且未过期；重新生成 Token 并替换 |
-| `src refspec main does not match any` | 本地分支名不是 `main` | 执行 `git branch` 查看实际分支名，修改推送脚本中的 `$branch` 变量与之相同 |
+| `Permission denied` 或 `403` | Token 无效或权限不足 | 检查 `GITHUB_TOKEN` 是否具备 `repo` 权限且未过期 |
+| `src refspec main does not match any` | 本地分支名不是 `main` | 执行 `git branch` 查看实际分支名，并设置 `GITHUB_BRANCH` |
 </details>
 
 ---
@@ -779,7 +790,7 @@ git branch -M $(git remote show origin | grep "HEAD branch" | cut -d " " -f5) 2>
 <summary>🔒 隐私与其他</summary>
 
 12. **隐私保护**  
-   自动生成的 `.gitignore` 文件会忽略 `config.json`、`git_sync.ps1` 和 `git_sync.sh`，防止敏感信息被提交到公开仓库。
+   请不要把真实 Token 写入已跟踪的 `config.json` 或 `git_sync.*`。本仓库支持用 `config.local.json`、环境变量或 GitHub Actions Secrets 存放敏感信息。
 
 </details>
 

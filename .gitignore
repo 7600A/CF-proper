@@ -1,6 +1,7 @@
-﻿config.json
+config.json
 git_sync.ps1
 git_sync.sh
 __pycache__/
-
-.idea/
+config.local.json
+cfnb.log
+*.log

@@ -66,10 +66,9 @@
 
     "_comment_cf_dns": "Cloudflare DNS 批量更新配置",
     "CF_ENABLED": true,
-    "CF_API_TOKEN": "cfut_ise7xCJP1QdechOdbQS1JfQwYT8zeZAQNdvEf06a94bdefaf",
-    "CF_ZONE_ID": "2ebb6dfcfe98653adccdeb64b4b3fa16",
-    "CF_DNS_RECORD_NAME": "mia.btbka7600.us.ci",
-    
+    "CF_API_TOKEN": "your_CF_API_TOKEN",
+    "CF_ZONE_ID": "your_CF_ZONE_ID",
+    "CF_DNS_RECORD_NAME": "your_CF_DNS_RECORD_NAME",
     "CF_TTL": 60,
     "CF_PROXIED": false,
     "CF_DNS_CONNECT_TIMEOUT": 3,
@@ -77,7 +76,7 @@
     "CF_DNS_READ_TIMEOUT": 3,
     "_comment_CF_DNS_READ_TIMEOUT": "Cloudflare API 读取超时（秒）",
     "DNS_RECORD_TYPE": "A",
-    "_comment_DNS_RECORD_TYPE": "DNS 记录类型（A 或 AAAA）",
+    "_comment_DNS_RECORD_TYPE": "DNS 记录类型（A 或 TXT）",
 
     "ADDITIONAL_SOURCES": [
         {

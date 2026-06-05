@@ -97,8 +97,131 @@ CN_TO_CODE = {
     "赞比亚": "ZM", "津巴布韦": "ZW",
 }
 
+# 三位字母国家代码 → 两位字母国家代码（ISO 3166-1 alpha-3 → alpha-2）
+ALPHA3_TO_ALPHA2 = {
+    "AFG": "AF", "ALA": "AX", "ALB": "AL", "DZA": "DZ", "ASM": "AS",
+    "AND": "AD", "AGO": "AO", "AIA": "AI", "ATA": "AQ", "ATG": "AG",
+    "ARG": "AR", "ARM": "AM", "ABW": "AW", "AUS": "AU", "AUT": "AT",
+    "AZE": "AZ", "BHS": "BS", "BHR": "BH", "BGD": "BD", "BRB": "BB",
+    "BLR": "BY", "BEL": "BE", "BLZ": "BZ", "BEN": "BJ", "BMU": "BM",
+    "BTN": "BT", "BOL": "BO", "BIH": "BA", "BWA": "BW", "BVT": "BV",
+    "BRA": "BR", "IOT": "IO", "BRN": "BN", "BGR": "BG", "BFA": "BF",
+    "BDI": "BI", "KHM": "KH", "CMR": "CM", "CAN": "CA", "CPV": "CV",
+    "CYM": "KY", "CAF": "CF", "TCD": "TD", "CHL": "CL", "CHN": "CN",
+    "CXR": "CX", "CCK": "CC", "COL": "CO", "COM": "KM", "COG": "CG",
+    "COD": "CD", "COK": "CK", "CRI": "CR", "CIV": "CI", "HRV": "HR",
+    "CUB": "CU", "CYP": "CY", "CZE": "CZ", "DNK": "DK", "DJI": "DJ",
+    "DMA": "DM", "DOM": "DO", "ECU": "EC", "EGY": "EG", "SLV": "SV",
+    "GNQ": "GQ", "ERI": "ER", "EST": "EE", "ETH": "ET", "FLK": "FK",
+    "FRO": "FO", "FJI": "FJ", "FIN": "FI", "FRA": "FR", "GUF": "GF",
+    "PYF": "PF", "ATF": "TF", "GAB": "GA", "GMB": "GM", "GEO": "GE",
+    "DEU": "DE", "GHA": "GH", "GIB": "GI", "GRC": "GR", "GRL": "GL",
+    "GRD": "GD", "GLP": "GP", "GUM": "GU", "GTM": "GT", "GGY": "GG",
+    "GIN": "GN", "GNB": "GW", "GUY": "GY", "HTI": "HT", "HMD": "HM",
+    "VAT": "VA", "HND": "HN", "HKG": "HK", "HUN": "HU", "ISL": "IS",
+    "IND": "IN", "IDN": "ID", "IRN": "IR", "IRQ": "IQ", "IRL": "IE",
+    "IMN": "IM", "ISR": "IL", "ITA": "IT", "JAM": "JM", "JPN": "JP",
+    "JEY": "JE", "JOR": "JO", "KAZ": "KZ", "KEN": "KE", "KIR": "KI",
+    "PRK": "KP", "KOR": "KR", "KWT": "KW", "KGZ": "KG", "LAO": "LA",
+    "LVA": "LV", "LBN": "LB", "LSO": "LS", "LBR": "LR", "LBY": "LY",
+    "LIE": "LI", "LTU": "LT", "LUX": "LU", "MAC": "MO", "MKD": "MK",
+    "MDG": "MG", "MWI": "MW", "MYS": "MY", "MDV": "MV", "MLI": "ML",
+    "MLT": "MT", "MHL": "MH", "MTQ": "MQ", "MRT": "MR", "MUS": "MU",
+    "MYT": "YT", "MEX": "MX", "FSM": "FM", "MDA": "MD", "MCO": "MC",
+    "MNG": "MN", "MNE": "ME", "MSR": "MS", "MAR": "MA", "MOZ": "MZ",
+    "MMR": "MM", "NAM": "NA", "NRU": "NR", "NPL": "NP", "NLD": "NL",
+    "NCL": "NC", "NZL": "NZ", "NIC": "NI", "NER": "NE", "NGA": "NG",
+    "NIU": "NU", "NFK": "NF", "MNP": "MP", "NOR": "NO", "OMN": "OM",
+    "PAK": "PK", "PLW": "PW", "PSE": "PS", "PAN": "PA", "PNG": "PG",
+    "PRY": "PY", "PER": "PE", "PHL": "PH", "PCN": "PN", "POL": "PL",
+    "PRT": "PT", "PRI": "PR", "QAT": "QA", "REU": "RE", "ROU": "RO",
+    "RUS": "RU", "RWA": "RW", "BLM": "BL", "SHN": "SH", "KNA": "KN",
+    "LCA": "LC", "MAF": "MF", "SPM": "PM", "VCT": "VC", "WSM": "WS",
+    "SMR": "SM", "STP": "ST", "SAU": "SA", "SEN": "SN", "SRB": "RS",
+    "SYC": "SC", "SLE": "SL", "SGP": "SG", "SXM": "SX", "SVK": "SK",
+    "SVN": "SI", "SLB": "SB", "SOM": "SO", "ZAF": "ZA", "SGS": "GS",
+    "SSD": "SS", "ESP": "ES", "LKA": "LK", "SDN": "SD", "SUR": "SR",
+    "SJM": "SJ", "SWZ": "SZ", "SWE": "SE", "CHE": "CH", "SYR": "SY",
+    "TWN": "TW", "TJK": "TJ", "TZA": "TZ", "THA": "TH", "TLS": "TL",
+    "TGO": "TG", "TKL": "TK", "TON": "TO", "TTO": "TT", "TUN": "TN",
+    "TUR": "TR", "TKM": "TM", "TCA": "TC", "TUV": "TV", "UGA": "UG",
+    "UKR": "UA", "ARE": "AE", "GBR": "GB", "USA": "US", "UMI": "UM",
+    "URY": "UY", "UZB": "UZ", "VUT": "VU", "VEN": "VE", "VNM": "VN",
+    "VGB": "VG", "VIR": "VI", "WLF": "WF", "ESH": "EH", "YEM": "YE",
+    "ZMB": "ZM", "ZWE": "ZW",
+}
+
+# 构建两位有效代码集合，用于快速校验
+CODE_SET = set(CN_TO_CODE.values())
+
+
 # ==================== 加载配置文件 ====================
 CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
+LOCAL_CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.local.json")
+
+ENV_OVERRIDE_KEYS = {
+    "USE_GLOBAL_MODE", "GLOBAL_TOP_N", "PER_COUNTRY_TOP_N",
+    "BANDWIDTH_CANDIDATES", "TCP_PROBES", "MIN_SUCCESS_RATE", "TIMEOUT",
+    "SOCKET_DEFAULT_TIMEOUT", "PROGRESS_PRINT_INTERVAL",
+    "FILTER_COUNTRIES_ENABLED", "ALLOWED_COUNTRIES",
+    "PRE_FILTER_BLOCKED_ENABLED", "PRE_FILTER_BLOCKED_COUNTRIES",
+    "PRE_FILTER_PORT_ENABLED", "PRE_FILTER_PORTS",
+    "ENABLE_WXPUSHER", "WXPUSHER_APP_TOKEN", "WXPUSHER_UIDS",
+    "WXPUSHER_API_URL", "NOTIFY_TIMEOUT", "NOTIFY_CONNECT_TIMEOUT",
+    "CF_ENABLED", "CF_API_TOKEN", "CF_ZONE_ID", "CF_DNS_RECORD_NAME",
+    "CF_TTL", "CF_PROXIED", "CF_DNS_CONNECT_TIMEOUT",
+    "CF_DNS_READ_TIMEOUT", "DNS_RECORD_TYPE",
+    "FETCH_MAX_RETRIES", "FETCH_RETRY_DELAY", "FETCH_TIMEOUT",
+    "FETCH_CONNECT_TIMEOUT", "OUTPUT_FILE", "ENABLE_LOGGING", "LOG_FILE",
+    "TEST_AVAILABILITY", "AVAILABILITY_CHECK_API", "AVAILABILITY_TIMEOUT",
+    "AVAILABILITY_CONNECT_TIMEOUT", "AVAILABILITY_RETRY_MAX",
+    "AVAILABILITY_RETRY_DELAY", "FILTER_IPV6_AVAILABILITY",
+    "FILTER_BLOCKED_COUNTRIES_ENABLED", "BLOCKED_COUNTRIES",
+    "DNS_IP_RISK_FILTER_ENABLED", "DNS_IP_RISK_MAX_LEVEL",
+    "DNS_UPDATE_TARGET_COUNT", "BANDWIDTH_SIZE_MB", "BANDWIDTH_TIMEOUT",
+    "BANDWIDTH_RETRY_MAX", "BANDWIDTH_RETRY_DELAY",
+    "BANDWIDTH_URL_TEMPLATE", "BANDWIDTH_PROCESS_BUFFER",
+    "BANDWIDTH_CONNECT_TIMEOUT", "MAX_WORKERS", "AVAILABILITY_WORKERS",
+    "FALLBACK_WORKERS", "BANDWIDTH_WORKERS", "DNS_UPDATE_MAX_RETRIES",
+    "DNS_UPDATE_RETRY_DELAY", "GITHUB_SYNC_MAX_RETRIES",
+    "GITHUB_SYNC_RETRY_DELAY", "GIT_SYNC_PROCESS_TIMEOUT",
+    "AD_HEADER_ENABLED", "AD_HEADER_LINES", "AD_FOOTER_ENABLED",
+    "AD_FOOTER_LINES", "AD_PERLINE_ENABLED", "AD_PERLINE_TEXT",
+    "IP_TXT_SHOW_BANDWIDTH", "IP_TXT_SHOW_LATENCY",
+}
+
+
+def parse_env_value(raw_value, current_value):
+    """按 config.json 中的原始类型解析环境变量值。"""
+    value = raw_value.strip()
+    if isinstance(current_value, bool):
+        return value.lower() in {"1", "true", "yes", "on"}
+    if isinstance(current_value, int) and not isinstance(current_value, bool):
+        return int(value)
+    if isinstance(current_value, float):
+        return float(value)
+    if isinstance(current_value, list):
+        try:
+            parsed = json.loads(value)
+            if isinstance(parsed, list):
+                return parsed
+        except json.JSONDecodeError:
+            pass
+        return [item.strip() for item in value.split(",") if item.strip()]
+    return raw_value
+
+
+def apply_env_overrides(config):
+    for key in sorted(ENV_OVERRIDE_KEYS):
+        raw_value = os.getenv(key)
+        if raw_value is None or raw_value == "":
+            continue
+        try:
+            config[key] = parse_env_value(raw_value, config.get(key, ""))
+        except (TypeError, ValueError) as e:
+            print(f"环境变量 {key} 解析失败，继续使用配置文件值：{e}")
+
+    return config
 
 def load_config():
     """加载 config.json 配置文件，缺失必填字段时抛出异常"""
@@ -106,12 +229,22 @@ def load_config():
         with open(CONFIG_FILE, "r", encoding="utf-8") as f:
             config = json.load(f)
     except FileNotFoundError:
-        print(f"❌ 错误：未找到配置文件 {CONFIG_FILE}")
+        print(f"错误：未找到配置文件 {CONFIG_FILE}")
         print("请在同目录下创建 config.json 文件，内容参考示例。")
         sys.exit(1)
     except json.JSONDecodeError as e:
-        print(f"❌ 错误：配置文件格式不正确 - {e}")
+        print(f"错误：配置文件格式不正确 - {e}")
         sys.exit(1)
+
+    if os.path.exists(LOCAL_CONFIG_FILE):
+        try:
+            with open(LOCAL_CONFIG_FILE, "r", encoding="utf-8") as f:
+                local_config = json.load(f)
+            config.update(local_config)
+            print(f"已加载本地覆盖配置：{LOCAL_CONFIG_FILE}")
+        except json.JSONDecodeError as e:
+            print(f"错误：本地覆盖配置格式不正确 - {e}")
+            sys.exit(1)
 
     defaults = {
         "USE_GLOBAL_MODE": True,
@@ -143,7 +276,7 @@ def load_config():
         "CF_PROXIED": False,
         "CF_DNS_CONNECT_TIMEOUT": 3,
         "CF_DNS_READ_TIMEOUT": 3,
-        "DNS_RECORD_TYPE": "A",
+        "DNS_RECORD_TYPE": "TXT",
         "ADDITIONAL_SOURCES": [],
         "FETCH_MAX_RETRIES": 3,
         "FETCH_RETRY_DELAY": 3,
@@ -197,9 +330,9 @@ def load_config():
     for key, value in defaults.items():
         if key not in config:
             config[key] = value
-            print(f"⚠️ 配置项 {key} 未设置，使用默认值：{value}")
+            print(f"配置项 {key} 未设置，使用默认值：{value}")
 
-    return config
+    return apply_env_overrides(config)
 
 cfg = load_config()
 
@@ -301,11 +434,11 @@ def send_wxpusher_notification(content, summary):
             timeout=(NOTIFY_CONNECT_TIMEOUT, NOTIFY_TIMEOUT)
         )
         if resp.status_code == 200:
-            print("✅ 微信通知已发送")
+            print("微信通知已发送")
         else:
-            print(f"⚠️ 微信通知发送失败: {resp.status_code}")
+            print(f"微信通知发送失败: {resp.status_code}")
     except Exception as e:
-        print(f"⚠️ 微信通知异常: {e}")
+        print(f"微信通知异常: {e}")
 
 # ==================== IP 风险等级查询 ====================
 RISK_LEVEL_ORDER = {
@@ -372,20 +505,26 @@ def get_ip_risk_level(ip):
 
 # ==================== 自适应多数据源解析引擎 ====================
 def extract_country_code(label):
-    """从任意标签中提取标准两位国家代码（支持纯代码、中文名、emoji国旗、混合无关文字）"""
+    """从任意标签中提取标准两位国家代码（支持两位代码、三位代码映射、中文名、emoji国旗、混合无关文字）"""
     label = label.strip()
     if not label:
         return None
 
     tokens = re.split(r'[\s,;|/]+', label)
 
-    # 1. 优先找标准两位大写字母代码
+    # 遍历每个 token，优先匹配三位/两位大写字母代码（后面不能紧跟英文字母）
     for token in tokens:
         token_cleaned = re.sub(r'^[\d\s\-_.|#]+', '', token.strip())
-        if re.match(r'^[A-Z]{2}$', token_cleaned):
-            return token_cleaned
+        # 优先检查三位代码
+        m3 = re.match(r'^([A-Z]{3})(?![A-Za-z])', token_cleaned)
+        if m3 and m3.group(1) in ALPHA3_TO_ALPHA2:
+            return ALPHA3_TO_ALPHA2[m3.group(1)]
+        # 再检查两位代码
+        m2 = re.match(r'^([A-Z]{2})(?![A-Za-z])', token_cleaned)
+        if m2 and m2.group(1) in CODE_SET:
+            return m2.group(1)
 
-    # 2. 对每个 token 尝试提取中文名
+    # 对每个 token 尝试提取中文名
     for token in tokens:
         token_cleaned = re.sub(r'^[\d\s\-_.|#]+', '', token)
         token_no_emoji = re.sub(r'[\U0001F1E6-\U0001F1FF]', '', token_cleaned).strip()
@@ -396,7 +535,7 @@ def extract_country_code(label):
             if code:
                 return code
 
-    # 3. 解码纯 emoji 国旗
+    # 解码纯 emoji 国旗
     emoji_chars = [c for c in label if '\U0001F1E6' <= c <= '\U0001F1FF']
     if len(emoji_chars) >= 2 and len(emoji_chars) % 2 == 0:
         first = ord(emoji_chars[0]) - 0x1F1E6
@@ -650,13 +789,13 @@ def availability_filter_with_retry(candidates):
         print(f"\n[可用性检测] 第 {attempt} 轮检测...")
         passed, ip_info, exit_details = availability_filter_candidates(candidates)
         if passed:
-            print(f"✅ 可用性检测通过 {len(passed)} 个节点")
+            print(f"可用性检测通过 {len(passed)} 个节点")
             return passed, ip_info, exit_details
         if attempt < AVAILABILITY_RETRY_MAX:
-            print(f"⚠️ 本轮可用性检测通过率为 0%，等待 {AVAILABILITY_RETRY_DELAY} 秒后重试...")
+            print(f"本轮可用性检测通过率为 0%，等待 {AVAILABILITY_RETRY_DELAY} 秒后重试...")
             time.sleep(AVAILABILITY_RETRY_DELAY)
 
-    print(f"❌ 可用性检测经 {AVAILABILITY_RETRY_MAX} 轮重试后仍无节点通过。")
+    print(f"可用性检测经 {AVAILABILITY_RETRY_MAX} 轮重试后仍无节点通过。")
     send_wxpusher_notification(
         content=f"IP 可用性检测经 {AVAILABILITY_RETRY_MAX} 轮重试后仍无节点通过，已跳过过滤，使用原候选列表继续。",
         summary="可用性检测全部失败"
@@ -699,7 +838,7 @@ def bandwidth_filter(candidates):
         return []
 
     if not shutil.which("curl"):
-        print("⚠️ 未检测到 curl 命令，带宽测速将跳过。")
+        print("未检测到 curl 命令，带宽测速将跳过。")
         return []
 
     print(f"\n开始带宽测速（对前 {len(candidates)} 个节点，并发 {BANDWIDTH_WORKERS}，超时 {BANDWIDTH_TIMEOUT}s）...")
@@ -732,8 +871,8 @@ def batch_update_cloudflare_dns(ip_list, ip_info=None, full_bw_results=None, tar
     if target_count is None:
         target_count = DNS_UPDATE_TARGET_COUNT
 
-    dns_ip_list = []
-    dns_node_list = []
+    dns_content_list = []   # A模式存储IP，TXT模式存储"ip:port"
+    dns_node_list = []      # 原始节点串，仅用于展示信息
     filtered_by_port = 0
     filtered_by_ipv6 = 0
     filtered_by_country = 0
@@ -741,38 +880,52 @@ def batch_update_cloudflare_dns(ip_list, ip_info=None, full_bw_results=None, tar
     risk_fallback_ip_list = []
     risk_fallback_node_list = []
 
+    record_type = DNS_RECORD_TYPE.upper()
+    if record_type not in ("A", "TXT"):
+        print(f"不支持的 DNS_RECORD_TYPE: {record_type}，已跳过 DNS 更新。")
+        return
+
+    # ---------- 从带宽测速结果中筛选节点 ----------
     if full_bw_results and ip_info:
         blocked_set = set()
         if FILTER_BLOCKED_COUNTRIES_ENABLED:
             blocked_set = {c.upper() for c in BLOCKED_COUNTRIES}
 
         for node_str, speed in full_bw_results:
-            if ':' in node_str:
-                port = node_str.split(':')[1].split('#')[0]
-                if port != '443':
-                    filtered_by_port += 1
-                    continue
+            # 提取 IP 和端口
+            if ':' not in node_str:
+                continue
+            parts = node_str.split(':')
+            if len(parts) < 2:
+                continue
+            pure_ip = parts[0]
+            port = parts[1].split('#')[0]
 
+            # === 端口过滤：统一强制要求 443 ===
+            if port != '443':
+                filtered_by_port += 1
+                continue
+
+            # === IPv6 落地过滤 ===
             if FILTER_IPV6_AVAILABILITY:
                 stack = ip_info.get(node_str, "unknown")
                 if stack == "ipv6_only":
                     filtered_by_ipv6 += 1
                     continue
 
+            # === 国家黑名单过滤 ===
             if blocked_set and '#' in node_str:
                 country = node_str.split('#')[-1].upper()
                 if country in blocked_set:
                     filtered_by_country += 1
                     continue
 
-            pure_ip = node_str.split(':')[0]   # 提前提取，供备份和后续使用
-
             # 备份未经过风险过滤的节点（用于回退）
             if DNS_IP_RISK_FILTER_ENABLED:
                 risk_fallback_ip_list.append(pure_ip)
                 risk_fallback_node_list.append(node_str)
 
-            # IP 风险等级过滤（仅 DNS 环节）
+            # === IP 风险等级过滤 ===
             if DNS_IP_RISK_FILTER_ENABLED:
                 risk_level = get_ip_risk_level(pure_ip)
                 max_level = DNS_IP_RISK_MAX_LEVEL
@@ -780,22 +933,38 @@ def batch_update_cloudflare_dns(ip_list, ip_info=None, full_bw_results=None, tar
                     filtered_by_risk += 1
                     continue
 
-            dns_ip_list.append(pure_ip)
+            # 根据记录类型构建内容
+            if record_type == "A":
+                dns_content_list.append(pure_ip)
+            else:   # TXT
+                dns_content_list.append(f"{pure_ip}:{port}")
             dns_node_list.append(node_str)
 
-            if len(dns_ip_list) >= target_count:
+            if len(dns_content_list) >= target_count:
                 break
 
-        # 风险等级检测全部失败通知
-        if DNS_IP_RISK_FILTER_ENABLED and not dns_ip_list and filtered_by_risk > 0:
+        # 风险等级检测全部失败时的回退处理
+        if DNS_IP_RISK_FILTER_ENABLED and not dns_content_list and filtered_by_risk > 0:
             send_wxpusher_notification(
                 content="风险等级检测全部失败：所有候选节点均因风险等级过高或 API 查询失败被过滤，已回退到无风险等级过滤的候选列表。",
                 summary="风险等级检测全部失败"
             )
-            # 回退到未经过风险过滤的列表（仅经过端口、IPv6、国家过滤）
-            dns_ip_list = risk_fallback_ip_list[:target_count]
-            dns_node_list = risk_fallback_node_list[:target_count]
+            # 从备份中取前 target_count 个
+            fallback_content = []
+            fallback_nodes = []
+            for i, (ip, node) in enumerate(zip(risk_fallback_ip_list, risk_fallback_node_list)):
+                if record_type == "A":
+                    fallback_content.append(ip)
+                else:
+                    ip_port = node.split('#')[0]
+                    fallback_content.append(ip_port)
+                fallback_nodes.append(node)
+                if len(fallback_content) >= target_count:
+                    break
+            dns_content_list = fallback_content
+            dns_node_list = fallback_nodes
 
+        # 打印过滤统计
         filter_parts = []
         if filtered_by_port > 0:
             filter_parts.append(f"非443端口过滤({filtered_by_port}个)")
@@ -806,102 +975,160 @@ def batch_update_cloudflare_dns(ip_list, ip_info=None, full_bw_results=None, tar
         if DNS_IP_RISK_FILTER_ENABLED and filtered_by_risk > 0:
             filter_parts.append(f"风险等级过滤({filtered_by_risk}个)")
         filter_str = " + ".join(filter_parts) if filter_parts else "无过滤"
-        print(f"从 {len(full_bw_results)} 个测速节点中筛选出 {len(dns_ip_list)} 个节点用于 DNS 更新（{filter_str}）。")
+        print(f"从 {len(full_bw_results)} 个测速节点中筛选出 {len(dns_content_list)} 个{'IP' if record_type=='A' else 'IP:端口'} 用于 DNS 更新（{filter_str}）。")
 
-    if not dns_ip_list:
+    # 如果没有有效的测速结果，降级使用 ip_list（仅 IP，无端口信息）
+    if not dns_content_list:
         if ip_list:
-            print("⚠️ 未能从完整测速结果构建 DNS 列表，降级使用 ip.txt 中的 IP。")
-            dns_ip_list = ip_list
-            dns_node_list = ip_list
+            print("未能从完整测速结果构建 DNS 列表，降级使用 ip.txt 中的 IP。")
+            if record_type == "A":
+                dns_content_list = ip_list
+                dns_node_list = ip_list
+            else:
+                # TXT 模式下无法获得端口，跳过降级
+                print("TXT 模式需要端口信息，但降级数据中无端口，DNS 更新跳过。")
+                return
         else:
             msg = "没有可用的 IP 用于 DNS 更新，跳过。"
             print(msg)
             send_wxpusher_notification(content=msg, summary="DNS 更新跳过")
             return
 
+    # 去重
     seen = set()
-    unique_ips = []
+    unique_content = []
     unique_nodes = []
-    for ip, node in zip(dns_ip_list, dns_node_list):
-        if ip not in seen:
-            seen.add(ip)
-            unique_ips.append(ip)
+    for content, node in zip(dns_content_list, dns_node_list):
+        if content not in seen:
+            seen.add(content)
+            unique_content.append(content)
             unique_nodes.append(node)
-    dns_ip_list = unique_ips
+    dns_content_list = unique_content
     dns_node_list = unique_nodes
 
-    print(f"\n准备将以下 {len(dns_ip_list)} 个 IP 批量更新到 Cloudflare DNS:")
+    # 打印即将更新的内容
+    print(f"\n准备将以下 {len(dns_content_list)} 个{'IP' if record_type=='A' else 'IP:端口'} 更新到 Cloudflare DNS（记录类型 {record_type}）:")
     speed_map = {}
     if full_bw_results:
         speed_map = {node: speed for node, speed in full_bw_results}
-    for i, (ip, node) in enumerate(zip(dns_ip_list, dns_node_list), 1):
+    for i, (content, node) in enumerate(zip(dns_content_list, dns_node_list), 1):
         speed = speed_map.get(node, 0)
         lat_ms = float('inf')
         if latency_map and node in latency_map:
             lat_ms = latency_map[node] * 1000
         if lat_ms != float('inf'):
-            print(f"{i}. {node} 速度 {speed:.2f} Mbps 延迟 {lat_ms:.2f} ms")
+            print(f"{i}. {content} 速度 {speed:.2f} Mbps 延迟 {lat_ms:.2f} ms")
         else:
-            print(f"{i}. {ip} 速度 {speed:.2f} Mbps")
+            print(f"{i}. {content} 速度 {speed:.2f} Mbps")
 
     headers = {
         "Authorization": f"Bearer {CF_API_TOKEN}",
         "Content-Type": "application/json"
     }
 
-    for attempt in range(1, DNS_UPDATE_MAX_RETRIES + 1):
-        print(f"\n[DNS 更新] 尝试 {attempt}/{DNS_UPDATE_MAX_RETRIES}...")
-        try:
-            # 1. 查询现有所有 DNS 记录
-            list_url = f"https://api.cloudflare.com/client/v4/zones/{CF_ZONE_ID}/dns_records?type={DNS_RECORD_TYPE}&name={CF_DNS_RECORD_NAME}"
-            response = requests.get(list_url, headers=headers, timeout=(CF_DNS_CONNECT_TIMEOUT, CF_DNS_READ_TIMEOUT))
-            response.raise_for_status()
-            result = response.json()
-            if not result.get('success'):
-                error_detail = result.get('errors')
-                raise Exception(f"查询 DNS 记录失败: {error_detail}")
+    # ===================== A 记录模式（多 IP 轮询）=====================
+    if record_type == "A":
+        for attempt in range(1, DNS_UPDATE_MAX_RETRIES + 1):
+            print(f"\n[DNS 更新] 尝试 {attempt}/{DNS_UPDATE_MAX_RETRIES}...")
+            try:
+                # 查询现有所有 A 记录
+                list_url = f"https://api.cloudflare.com/client/v4/zones/{CF_ZONE_ID}/dns_records?type=A&name={CF_DNS_RECORD_NAME}"
+                response = requests.get(list_url, headers=headers, timeout=(CF_DNS_CONNECT_TIMEOUT, CF_DNS_READ_TIMEOUT))
+                response.raise_for_status()
+                result = response.json()
+                if not result.get('success'):
+                    raise Exception(f"查询 DNS 记录失败: {result.get('errors')}")
 
-            existing_records = result.get('result', [])
-            deletes = [{"id": rec["id"]} for rec in existing_records]
-            posts = [
-                {
-                    "name": CF_DNS_RECORD_NAME,
-                    "type": DNS_RECORD_TYPE,
-                    "content": ip,
-                    "ttl": CF_TTL,
-                    "proxied": CF_PROXIED
-                }
-                for ip in dns_ip_list
-            ]
+                existing_records = result.get('result', [])
+                deletes = [{"id": rec["id"]} for rec in existing_records]
+                posts = [
+                    {
+                        "name": CF_DNS_RECORD_NAME,
+                        "type": "A",
+                        "content": ip,
+                        "ttl": CF_TTL,
+                        "proxied": CF_PROXIED
+                    }
+                    for ip in dns_content_list
+                ]
 
-            # 2. 原子批量操作：同时删除旧记录 + 创建新记录
-            batch_url = f"https://api.cloudflare.com/client/v4/zones/{CF_ZONE_ID}/dns_records/batch"
-            payload = {"deletes": deletes, "posts": posts}
-            response = requests.post(batch_url, headers=headers, json=payload,
-                                    timeout=(CF_DNS_CONNECT_TIMEOUT, CF_DNS_READ_TIMEOUT))
-            response.raise_for_status()
-            result = response.json()
-            if not result.get('success'):
-                error_detail = result.get('errors')
-                raise Exception(f"批量更新失败: {error_detail}")
+                batch_url = f"https://api.cloudflare.com/client/v4/zones/{CF_ZONE_ID}/dns_records/batch"
+                payload = {"deletes": deletes, "posts": posts}
+                response = requests.post(batch_url, headers=headers, json=payload,
+                                        timeout=(CF_DNS_CONNECT_TIMEOUT, CF_DNS_READ_TIMEOUT))
+                response.raise_for_status()
+                result = response.json()
+                if not result.get('success'):
+                    raise Exception(f"批量更新失败: {result.get('errors')}")
 
-            success_msg = f"✅ Cloudflare DNS 批量更新成功！已将 {CF_DNS_RECORD_NAME} 指向 {len(dns_ip_list)} 个 IP。"
-            print(success_msg)
-            print("注意：DNS 解析将随机返回这些 IP 中的一个，实现负载均衡。")
-            return
+                success_msg = f"Cloudflare DNS 批量更新成功！已将 {CF_DNS_RECORD_NAME} 指向 {len(dns_content_list)} 个 IP。"
+                print(success_msg)
+                print("注意：DNS 解析将随机返回这些 IP 中的一个，实现负载均衡。")
+                return
 
-        except Exception as e:
-            error_msg = f"[尝试 {attempt}/{DNS_UPDATE_MAX_RETRIES}] DNS 更新出错: {e}"
-            print(error_msg)
-            if attempt < DNS_UPDATE_MAX_RETRIES:
-                print(f"等待 {DNS_UPDATE_RETRY_DELAY} 秒后重试...")
-                time.sleep(DNS_UPDATE_RETRY_DELAY)
-            else:
-                final_error = f"❌ Cloudflare DNS 更新失败，已重试 {DNS_UPDATE_MAX_RETRIES} 次，错误：{e}"
-                print(final_error)
-                send_wxpusher_notification(content=final_error, summary="DNS 更新失败")
+            except Exception as e:
+                error_msg = f"[尝试 {attempt}/{DNS_UPDATE_MAX_RETRIES}] DNS 更新出错: {e}"
+                print(error_msg)
+                if attempt < DNS_UPDATE_MAX_RETRIES:
+                    print(f"等待 {DNS_UPDATE_RETRY_DELAY} 秒后重试...")
+                    time.sleep(DNS_UPDATE_RETRY_DELAY)
+                else:
+                    final_error = f"Cloudflare DNS 更新失败，已重试 {DNS_UPDATE_MAX_RETRIES} 次，错误：{e}"
+                    print(final_error)
+                    send_wxpusher_notification(content=final_error, summary="DNS 更新失败")
+
+    # ===================== TXT 记录模式（每个 IP:端口 独立一条记录）=====================
+    else:   # record_type == "TXT"
+        for attempt in range(1, DNS_UPDATE_MAX_RETRIES + 1):
+            print(f"\n[TXT 记录更新] 尝试 {attempt}/{DNS_UPDATE_MAX_RETRIES}...")
+            try:
+                # 1. 查询现有所有同名 TXT 记录
+                list_url = f"https://api.cloudflare.com/client/v4/zones/{CF_ZONE_ID}/dns_records?type=TXT&name={CF_DNS_RECORD_NAME}"
+                resp = requests.get(list_url, headers=headers, timeout=(CF_DNS_CONNECT_TIMEOUT, CF_DNS_READ_TIMEOUT))
+                resp.raise_for_status()
+                existing = resp.json().get('result', [])
+                deletes = [{"id": rec["id"]} for rec in existing]
+
+                # 2. 准备要创建的所有 TXT 记录
+                posts = [
+                    {
+                        "name": CF_DNS_RECORD_NAME,
+                        "type": "TXT",
+                        "content": content,
+                        "ttl": CF_TTL
+                    }
+                    for content in dns_content_list
+                ]
+
+                # 3. 批量操作：删除旧记录 + 创建新记录
+                batch_url = f"https://api.cloudflare.com/client/v4/zones/{CF_ZONE_ID}/dns_records/batch"
+                payload = {"deletes": deletes, "posts": posts}
+                batch_resp = requests.post(batch_url, headers=headers, json=payload,
+                                           timeout=(CF_DNS_CONNECT_TIMEOUT, CF_DNS_READ_TIMEOUT))
+                batch_resp.raise_for_status()
+                result = batch_resp.json()
+                if not result.get('success'):
+                    raise Exception(f"批量更新失败: {result.get('errors')}")
+
+                print(f"Cloudflare TXT 记录批量更新成功！共 {len(dns_content_list)} 条记录，每条内容为一个 IP:端口。")
+                return
+
+            except Exception as e:
+                error_msg = f"[尝试 {attempt}/{DNS_UPDATE_MAX_RETRIES}] TXT 更新出错: {e}"
+                print(error_msg)
+                if attempt < DNS_UPDATE_MAX_RETRIES:
+                    print(f"等待 {DNS_UPDATE_RETRY_DELAY} 秒后重试...")
+                    time.sleep(DNS_UPDATE_RETRY_DELAY)
+                else:
+                    final_error = f"Cloudflare TXT 记录更新失败，已重试 {DNS_UPDATE_MAX_RETRIES} 次，错误：{e}"
+                    print(final_error)
+                    send_wxpusher_notification(content=final_error, summary="DNS 更新失败")
 
 def sync_to_github():
+    if GITHUB_SYNC_MAX_RETRIES <= 0:
+        print("GitHub 内置同步已关闭。")
+        return
+
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
     if sys.platform == "win32":
@@ -915,7 +1142,7 @@ def sync_to_github():
 
     script_path = os.path.join(script_dir, script_name)
     if not os.path.exists(script_path):
-        print(f"⚠️ 未找到 {script_name}，跳过 GitHub 同步。")
+        print(f"未找到 {script_name}，跳过 GitHub 同步。")
         return
 
     if sys.platform != "win32":
@@ -939,17 +1166,17 @@ def sync_to_github():
             try:
                 stdout, stderr = process.communicate(timeout=GIT_SYNC_PROCESS_TIMEOUT)
                 if process.returncode == 0:
-                    print("✅ 已自动推送到 GitHub。")
+                    print("已自动推送到 GitHub。")
                     return
                 else:
-                    print(f"❌ 推送失败 (退出码 {process.returncode})")
+                    print(f"推送失败 (退出码 {process.returncode})")
                     if stderr:
                         print(f"错误信息: {stderr.strip()}")
             except subprocess.TimeoutExpired:
                 process.kill()
-                print(f"❌ 推送超时（超过 {GIT_SYNC_PROCESS_TIMEOUT} 秒）")
+                print(f"推送超时（超过 {GIT_SYNC_PROCESS_TIMEOUT} 秒）")
         except Exception as e:
-            print(f"❌ 推送过程异常: {e}")
+            print(f"推送过程异常: {e}")
 
         if attempt < GITHUB_SYNC_MAX_RETRIES:
             print(f"等待 {GITHUB_SYNC_RETRY_DELAY} 秒后重试...")
@@ -959,7 +1186,7 @@ def sync_to_github():
         content=f"GitHub 推送失败，已重试 {GITHUB_SYNC_MAX_RETRIES} 次，请检查网络或仓库状态。",
         summary="GitHub 推送失败"
     )
-    print(f"⚠️ 已尝试 {GITHUB_SYNC_MAX_RETRIES} 次推送，均失败，请检查网络或 GitHub 仓库状态。")
+    print(f"已尝试 {GITHUB_SYNC_MAX_RETRIES} 次推送，均失败，请检查网络或 GitHub 仓库状态。")
 
 def write_ip_txt(final_nodes, output_file,
                  header_enabled, header_lines,
@@ -1024,7 +1251,7 @@ def main():
         ports_display = ', '.join(PRE_FILTER_PORTS)
         print(f"前置端口过滤（仅保留端口 {ports_display}）：{before} -> {after} 个节点")
         if not nodes:
-            print("⚠️ 前置端口过滤后无任何节点，退出程序。")
+            print("前置端口过滤后无任何节点，退出程序。")
             sys.exit(0)
 
     # 前置黑名单过滤
@@ -1035,7 +1262,7 @@ def main():
         after = len(nodes)
         print(f"前置黑名单过滤：{before} -> {after} 个节点（已屏蔽：{', '.join(sorted(blocked_set))}）")
         if not nodes:
-            print("⚠️ 前置黑名单过滤后无任何节点，退出程序。")
+            print("前置黑名单过滤后无任何节点，退出程序。")
             sys.exit(0)
 
     if not nodes:
@@ -1054,7 +1281,7 @@ def main():
         after = len(nodes)
         print(f"\n国家过滤（测试前）：{before} -> {after} 个节点（允许国家：{', '.join(allowed_set)}）")
         if not nodes:
-            print("⚠️ 过滤后无任何节点，退出程序。")
+            print("过滤后无任何节点，退出程序。")
             sys.exit(0)
 
     total = len(nodes)
@@ -1114,11 +1341,11 @@ def main():
         if bw_results:
             break
         if attempt < BANDWIDTH_RETRY_MAX:
-            print(f"⚠️ 本轮测速无有效结果，等待 {BANDWIDTH_RETRY_DELAY} 秒后重试...")
+            print(f"本轮测速无有效结果，等待 {BANDWIDTH_RETRY_DELAY} 秒后重试...")
             time.sleep(BANDWIDTH_RETRY_DELAY)
 
     if not bw_results:
-        print("\n⚠️ 带宽测速多次重试仍无有效结果，将使用 TCP 筛选结果作为最终节点。")
+        print("\n带宽测速多次重试仍无有效结果，将使用 TCP 筛选结果作为最终节点。")
         send_wxpusher_notification(
             content=f"带宽测速经 {BANDWIDTH_RETRY_MAX} 轮尝试后仍无有效结果，已降级使用 TCP 排序节点。",
             summary="带宽测速全部失败"
@@ -1188,9 +1415,9 @@ if __name__ == "__main__":
             script_dir = os.path.dirname(os.path.abspath(__file__))
             log_path = os.path.join(script_dir, log_filename)
             log_f = open(log_path, "w", encoding="utf-8")
-            print("✅ 日志已启用，输出将保存到 " + log_path)
+            print("日志已启用，输出将保存到 " + log_path)
         except Exception as e:
-            print(f"❌ 无法打开日志文件 {log_path}: {e}")
+            print(f"无法打开日志文件 {log_path}: {e}")
             log_f = None
         else:
             class _Tee:

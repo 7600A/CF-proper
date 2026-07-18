@@ -1358,6 +1358,8 @@ def main():
                 nodes_sorted = sorted(nodes, key=lambda x: (-x[2], x[1]))
                 for node_str, _, _ in nodes_sorted[:PER_COUNTRY_TOP_N]:
                     final_selected.append(node_str)
+        # 带宽测速降级：无测速数据，speed_map 置空，避免后续引用未定义变量
+        speed_map = {}
     else:
         if USE_GLOBAL_MODE:
             final_selected = [node for node, _ in bw_results[:GLOBAL_TOP_N]]

@@ -1,13 +1,13 @@
 {
     "_comment": "Cloudflare IP 优选工具配置文件 - 请根据需求修改下方参数",
 
-    "USE_GLOBAL_MODE": true,
+    "USE_GLOBAL_MODE": false,
     "_comment_USE_GLOBAL_MODE": "true=全局最优15个；false=每个国家最优1个",
 
     "GLOBAL_TOP_N": 15,
     "_comment_GLOBAL_TOP_N": "全局模式下最终保留的节点数量",
 
-    "PER_COUNTRY_TOP_N": 1,
+    "PER_COUNTRY_TOP_N": 2,
     "_comment_PER_COUNTRY_TOP_N": "分国家模式下每个国家保留的节点数量",
 
     "BANDWIDTH_CANDIDATES": 90,
@@ -28,10 +28,10 @@
     "PROGRESS_PRINT_INTERVAL": 1,
     "_comment_PROGRESS_PRINT_INTERVAL": "进度打印刷新间隔（秒），避免频繁 I/O",
 
-    "FILTER_COUNTRIES_ENABLED": false,
+    "FILTER_COUNTRIES_ENABLED": true,
     "_comment_FILTER_COUNTRIES_ENABLED": "前置白名单开关（true=仅保留下方 ALLOWED_COUNTRIES 中的国家，其余在 TCP 测试前剔除）",
 
-    "ALLOWED_COUNTRIES": ["US"],
+    "ALLOWED_COUNTRIES": ["HK", "TW", "KR", "JP", "SG"],
     "_comment_ALLOWED_COUNTRIES": "前置白名单列表（仅在 FILTER_COUNTRIES_ENABLED=true 时生效）",
 
     "PRE_FILTER_BLOCKED_ENABLED": true,
@@ -65,7 +65,7 @@
     "_comment_NOTIFY_CONNECT_TIMEOUT": "微信通知 API 连接超时（秒）",
 
     "_comment_cf_dns": "Cloudflare DNS 批量更新配置",
-    "CF_ENABLED": true,
+    "CF_ENABLED": false,
     "CF_API_TOKEN": "your_CF_API_TOKEN",
     "CF_ZONE_ID": "your_CF_ZONE_ID",
     "CF_DNS_RECORD_NAME": "your_CF_DNS_RECORD_NAME",
@@ -136,9 +136,9 @@
     "_comment_FILTER_BLOCKED_COUNTRIES_ENABLED": "【仅DNS】黑名单开关（true=屏蔽下方 BLOCKED_COUNTRIES 中的国家）",
 
     "BLOCKED_COUNTRIES": [
-        "BD", "BI", "BY", "CD", "CF", "CN", "CU", "DE", "ET", "HK",
-        "IR", "KP", "LY", "MO", "NG", "NL", "PK", "RU", "SD", "SO",
-        "SY", "TH", "TW", "UA", "VE", "VN", "YE", "ZW"
+        "BD", "BI", "BY", "CD", "CF", "CN", "CU", "DE", "ET",
+        "IR", "KP", "LY", "NG", "NL", "PK", "RU", "SD", "SO",
+        "SY", "TH", "UA", "VE", "VN", "YE", "ZW"
     ],
     "_comment_BLOCKED_COUNTRIES": "【仅DNS】黑名单国家代码列表（DNS 更新时剔除这些国家的节点）",
 
